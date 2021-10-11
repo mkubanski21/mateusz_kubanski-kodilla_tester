@@ -12,7 +12,7 @@ public class LeapYear {
         } else if (year % 400 != 0) {
             System.out.println("Rok "+year+" nie jest przestępny.");
         } else {
-            System.out.println("Rok "+year+" jest przestępny.");
+            System.out.println("Rok "+year+" jest przestępny");
         }
     }
 }
