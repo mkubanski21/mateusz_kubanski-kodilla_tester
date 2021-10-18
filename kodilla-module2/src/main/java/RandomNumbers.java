@@ -4,10 +4,6 @@ import java.util.ArrayList;
 public class RandomNumbers {
     private ArrayList<Integer> values = new ArrayList<>();
 
-    public RandomNumbers() {
-        this.values = values;
-    }
-
     public ArrayList<Integer> numbers() {
         Random random = new Random();
         int sum = 0;
