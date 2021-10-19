@@ -9,6 +9,14 @@ public class Application {
         this.height = height;
     }
 
+    public void checkIfNameIsNull() {
+        if (this.name != null) {
+            System.out.println("Name is specified.");
+        } else {
+            System.out.println("No name specified.");
+        }
+    }
+
     public void checkAge() {
         if (this.age > 50) {
             System.out.println("User is older than 50.");
