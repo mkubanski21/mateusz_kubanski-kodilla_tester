@@ -2,17 +2,12 @@ package com.kodilla.abstracts.homework;
 
 public class Waiter extends Job {
 
-    private String firstName = "Piotr";
-    private int age = 22;
-    private String job = "waiter";
-
-
     public Waiter(){
         super("take care of guests, deliver food and drinks.",3500);
     }
 
     @Override
     public void showResponsibilities() {
-        System.out.println(firstName+" is "+age+" years old and is a "+job+ ". "+"Responsibilities in job: "+getResponsibilities());
+        System.out.println("Waiter's responsibilities at job: "+getResponsibilities());
     }
 }
