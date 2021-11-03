@@ -10,7 +10,7 @@ public class Calculator {
         return a-b;
     }
 
-    public int raiseTo2Power (int a){
+    public double raiseTo2Power (double a){
         return a*a;
     }
 }
