@@ -1,34 +1,25 @@
 package com.kodilla.bank.homework;
 
 public class Bank {
-    private CashMachine cashMachine1;
-    private CashMachine cashMachine2;
-    private CashMachine cashMachine3;
+
     private CashMachine[] cashMachines;
+    private int numberOfMachines;
 
     public Bank(){
-        this.cashMachine1 = new CashMachine();
-        this.cashMachine2 = new CashMachine();
-        this.cashMachine3 = new CashMachine();
-        this.cashMachines = new CashMachine[] {cashMachine1, cashMachine2, cashMachine3};
+        this.cashMachines = new CashMachine[0];
+        this.numberOfMachines = 0;
+    }
 
+    public void addCashMachine(CashMachine machine){
+        this.numberOfMachines++;
+        CashMachine[] newTab = new CashMachine[this.numberOfMachines];
+        System.arraycopy(cashMachines, 0, newTab, 0, cashMachines.length);
+        newTab[this.numberOfMachines - 1] = machine;
+        this.cashMachines = newTab;
     }
 
     public CashMachine[] getCashMachines() {
-        return cashMachines;
-    }
-
-
-    public void addTransactionToCashMachine1(double transaction) {
-            this.cashMachine1.add(transaction);
-    }
-
-    public void addTransactionToCashMachine2(double transaction) {
-            this.cashMachine2.add(transaction);
-    }
-
-    public void addTransactionToCashMachine3(double transaction) {
-            this.cashMachine3.add(transaction);
+        return this.cashMachines;
     }
 
     public double getOverallSaldo() {
