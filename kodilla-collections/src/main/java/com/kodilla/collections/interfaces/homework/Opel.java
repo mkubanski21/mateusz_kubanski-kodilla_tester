@@ -1,11 +1,13 @@
 package com.kodilla.collections.interfaces.homework;
 
-public class Opel implements Car{
+public class Opel implements Car {
 
     private int speed;
+    private int increaseValue;
 
-    public Opel(){
+    public Opel(int increaseValue) {
         this.speed = 0;
+        this.increaseValue = increaseValue;
     }
 
     @Override
@@ -15,7 +17,7 @@ public class Opel implements Car{
 
     @Override
     public void increaseSpeed() {
-        speed += 30;
+        speed += increaseValue;
     }
 
     @Override

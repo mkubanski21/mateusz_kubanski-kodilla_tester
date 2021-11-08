@@ -3,9 +3,11 @@ package com.kodilla.collections.interfaces.homework;
 public class Audi implements Car {
 
     private int speed;
+    private int increaseValue;
 
-    public Audi(){
+    public Audi(int increaseValue){
         this.speed = 0;
+        this.increaseValue = increaseValue;
     }
 
     @Override
@@ -15,7 +17,7 @@ public class Audi implements Car {
 
     @Override
     public void increaseSpeed() {
-        speed += 40;
+        speed += increaseValue;
     }
 
     @Override
