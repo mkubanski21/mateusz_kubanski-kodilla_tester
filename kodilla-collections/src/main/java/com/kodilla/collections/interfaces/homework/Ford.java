@@ -1,13 +1,13 @@
 package com.kodilla.collections.interfaces.homework;
 
+import java.util.Objects;
+
 public class Ford implements Car {
 
     private int speed;
-    private int increaseValue;
 
-    public Ford(int increaseValue) {
-        this.speed = 0;
-        this.increaseValue = increaseValue;
+    public Ford(int speed) {
+        this.speed = speed;
     }
 
     @Override
@@ -17,11 +17,24 @@ public class Ford implements Car {
 
     @Override
     public void increaseSpeed() {
-        speed += increaseValue;
+        speed += 30;
     }
 
     @Override
     public void decreaseSpeed() {
         speed -= 20;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ford ford = (Ford) o;
+        return speed == ford.speed;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(speed);
     }
 }
