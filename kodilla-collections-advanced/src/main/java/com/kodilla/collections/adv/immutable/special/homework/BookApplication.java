@@ -12,5 +12,6 @@ public class BookApplication {
         System.out.println(book3.hashCode());
         System.out.println(book1 == book2);
         System.out.println(book1 == book3);
+        System.out.println(BookManager.listOfBooks.size());
     }
 }

@@ -10,9 +10,10 @@ public class BookManager {
         Book book = new Book(title, author);
 
         for (Book bookInSet : listOfBooks)
-            if (book.getAuthor().equals(bookInSet.getAuthor()) && book.getTitle().equals(bookInSet.getTitle()))
+            if (book.getAuthor().equals(bookInSet.getAuthor()) && book.getTitle().equals(bookInSet.getTitle())) {
                 System.out.println("Book with the same title: " + book.getTitle() + ", and author: " + book.getAuthor() + " already exist");
-
+                return book;
+            }
         listOfBooks.add(book);
         return book;
     }
