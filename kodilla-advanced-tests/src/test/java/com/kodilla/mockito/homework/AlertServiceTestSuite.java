@@ -3,14 +3,13 @@ package com.kodilla.mockito.homework;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AlertServiceTestSuite {
 
     AlertService alertService = new AlertService();
-    Person person1 = new Person();
-    Person person2 = new Person();
-    Person person3 = new Person();
+    Person person1 = Mockito.mock(Person.class);
+    Person person2 = Mockito.mock(Person.class);
+    Person person3 = Mockito.mock(Person.class);
     Location location1 = Mockito.mock(Location.class);
     Location location2 = Mockito.mock(Location.class);
     Location location3 = Mockito.mock(Location.class);
@@ -30,9 +29,9 @@ class AlertServiceTestSuite {
         alertService.addPersonToLocation(person1, location3);
         alertService.sendAlert(location2, alert);
         alertService.sendAlert(location3, alert);
-        assertEquals(2, person1.receive(alert)-1);
-        assertEquals(0, person2.receive(alert)-1);
-        assertEquals(0, person3.receive(alert)-1);
+        Mockito.verify(person1, Mockito.times(2)).receive(alert);
+        Mockito.verify(person2, Mockito.times(0)).receive(alert);
+        Mockito.verify(person3, Mockito.times(0)).receive(alert);
     }
 
     @Test
@@ -42,9 +41,9 @@ class AlertServiceTestSuite {
         alertService.sendAlert(location1, alert);
         alertService.sendAlert(location2, alert);
         alertService.sendAlert(location3, alert);
-        assertEquals(1, person1.receive(alert)-1);
-        assertEquals(1, person2.receive(alert)-1);
-        assertEquals(1, person3.receive(alert)-1);
+        Mockito.verify(person1, Mockito.times(1)).receive(alert);
+        Mockito.verify(person2, Mockito.times(1)).receive(alert);
+        Mockito.verify(person3, Mockito.times(1)).receive(alert);
     }
 
     @Test
@@ -56,22 +55,22 @@ class AlertServiceTestSuite {
         alertService.sendAlert(location1, alert);
         alertService.sendAlert(location2, alert);
         alertService.sendAlert(location3, alert);
-        assertEquals(2, person1.receive(alert)-1);
-        assertEquals(0, person2.receive(alert)-1);
-        assertEquals(1, person3.receive(alert)-1);
+        Mockito.verify(person1, Mockito.times(2)).receive(alert);
+        Mockito.verify(person2, Mockito.times(0)).receive(alert);
+        Mockito.verify(person3, Mockito.times(1)).receive(alert);
     }
 
     @Test
     public void personUnsubscribedFromAllLocationsShouldNotReceiveAnyAlerts() {
-            alertService.addPersonToLocation(person1, location2);
-            alertService.addPersonToLocation(person1, location3);
-            alertService.removePersonFromAllLocations(person1);
-            alertService.sendAlert(location1, alert);
-            alertService.sendAlert(location2, alert);
-            alertService.sendAlert(location3, alert);
-            assertEquals(0, person1.receive(alert)-1);
-            assertEquals(1, person2.receive(alert)-1);
-            assertEquals(1, person3.receive(alert)-1);
+        alertService.addPersonToLocation(person1, location2);
+        alertService.addPersonToLocation(person1, location3);
+        alertService.removePersonFromAllLocations(person1);
+        alertService.sendAlert(location1, alert);
+        alertService.sendAlert(location2, alert);
+        alertService.sendAlert(location3, alert);
+        Mockito.verify(person1, Mockito.times(0)).receive(alert);
+        Mockito.verify(person2, Mockito.times(1)).receive(alert);
+        Mockito.verify(person3, Mockito.times(1)).receive(alert);
     }
 
     @Test
@@ -79,9 +78,9 @@ class AlertServiceTestSuite {
         alertService.addPersonToLocation(person3, location2);
         alertService.removePersonFromAllLocations(person1);
         alertService.sendGeneralAlert(alert);
-        assertEquals(0, person1.receive(alert)-1);
-        assertEquals(1, person2.receive(alert)-1);
-        assertEquals(1, person3.receive(alert)-1);
+        Mockito.verify(person1, Mockito.times(0)).receive(alert);
+        Mockito.verify(person2, Mockito.times(1)).receive(alert);
+        Mockito.verify(person3, Mockito.times(1)).receive(alert);
     }
 
     @Test
@@ -91,8 +90,8 @@ class AlertServiceTestSuite {
         alertService.sendAlert(location1, alert);
         alertService.sendAlert(location2, alert);
         alertService.sendAlert(location3, alert);
-        assertEquals(0, person1.receive(alert)-1);
-        assertEquals(0, person2.receive(alert)-1);
-        assertEquals(1, person3.receive(alert)-1);
+        Mockito.verify(person1, Mockito.times(0)).receive(alert);
+        Mockito.verify(person2, Mockito.times(0)).receive(alert);
+        Mockito.verify(person3, Mockito.times(1)).receive(alert);
     }
 }
