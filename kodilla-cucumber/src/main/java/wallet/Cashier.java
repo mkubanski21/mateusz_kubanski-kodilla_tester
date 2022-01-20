@@ -9,7 +9,11 @@ public class Cashier {
     }
 
     public void withdraw(Wallet wallet, int amount) {
-        wallet.debit(amount);
-        cashSlot.dispense(amount);
+        if (wallet.getBalance() >= amount && amount >0) {
+            wallet.debit(amount);
+            cashSlot.dispense(amount);
+        } else {
+            System.out.println("Withdrawal rejected, not enough money on the account");
+        }
     }
 }

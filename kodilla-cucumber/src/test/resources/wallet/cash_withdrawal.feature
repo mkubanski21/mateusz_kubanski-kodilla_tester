@@ -18,10 +18,10 @@ Feature: Cash Withdrawal
       | deposit | withdrawal |
       | 100 | 101 |
 
-  Scenario Outline: Unsuccessful withdrawal from a wallet because of amount of withdrawal less or equal to 0
+  Scenario Outline: Unsuccessful withdrawal from a wallet because of amount of withdrawal is less or equal to 0
     Given I have deposited $<deposit> in my wallet
-    When I request withdrawal less than 0: $<withdrawal>
-    Then $<withdrawal> withdrawal should be rejected
+    When I request withdrawal less or equal to 0$: <withdrawal>
+    Then <withdrawal>$ withdrawal should be rejected
     Examples:
       | deposit | withdrawal |
       | 100 | 0 |

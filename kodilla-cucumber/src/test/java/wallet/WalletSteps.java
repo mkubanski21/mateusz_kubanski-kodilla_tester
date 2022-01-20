@@ -7,8 +7,11 @@ public class WalletSteps implements En {
 
     private Wallet wallet = new Wallet();
     private CashSlot cashSlot = new CashSlot();
+    Cashier cashier = new Cashier(cashSlot);
 
     public WalletSteps() {
+
+//        Refer to cash_withdrawal.feature
 
         Given("I have deposited $200 in my wallet", () -> {
             wallet.deposit(200);
@@ -16,7 +19,6 @@ public class WalletSteps implements En {
         });
 
         When("I request $30", () -> {
-            Cashier cashier = new Cashier(cashSlot);
             cashier.withdraw(wallet, 30);
         });
 
@@ -34,7 +36,6 @@ public class WalletSteps implements En {
         });
 
         When("I request $201", () -> {
-            Cashier cashier = new Cashier(cashSlot);
             cashier.withdraw(wallet, 201);
         });
 
@@ -46,28 +47,60 @@ public class WalletSteps implements En {
             Assert.assertEquals( 0,  wallet.getBalance());
         });
 
-//        Then("the balance of my wallet should be ${integer}", (Integer integer) -> {
-//            Assert.assertEquals( integer,  wallet.getBalance());
-//        });
-
-
-/////////////////////////////////////////
         Given("I have deposited $100 in my wallet", () -> {
             wallet.deposit(100);
             Assert.assertEquals(100, wallet.getBalance());
         });
 
         When("I request $101", () -> {
-            Cashier cashier = new Cashier(cashSlot);
             cashier.withdraw(wallet, 101);
         });
 
         Then("$101 withdrawal should be rejected", () -> {
-            Assert.assertEquals(100, wallet.getBalance());
-
-//            Assert.assertTrue("Withdrawal rejected, deposit lower than withdrawal",wallet.getBalance() < cashSlot.getContents());
+            Assert.assertEquals(0, cashSlot.getContents());
         });
 
+        When("I request withdrawal less or equal to 0$: 0", () -> {
+            cashier.withdraw(wallet,0);
+        });
 
+        Then("0$ withdrawal should be rejected", () -> {
+            Assert.assertEquals(0, cashSlot.getContents());
+        });
+
+        When("I request withdrawal less or equal to 0$: -50", () -> {
+            cashier.withdraw(wallet,-50);
+        });
+
+        Then("-50$ withdrawal should be rejected", () -> {
+            Assert.assertEquals(0, cashSlot.getContents());
+        });
+
+//        Refer to display_balance.feature
+
+        Given("there is $100 in my wallet", () -> {
+            wallet.deposit(100);
+        });
+
+        When("I check the balance of my wallet", () -> {
+        });
+
+        Then("I should see that the balance is $100", () -> {
+            Assert.assertEquals(100, wallet.getBalance());
+        });
+
+//        Refer to cash_deposit.feature
+
+        Given("I have 0$ on my wallet", () -> {
+            Assert.assertEquals(0, wallet.getBalance());
+        });
+
+        When("I deposit -50$ so transaction is less than 0$", () -> {
+            wallet.deposit(-50);
+        });
+
+        Then("-50$ deposit should be rejected", () -> {
+            Assert.assertEquals(0, wallet.getBalance());
+        });
     }
 }
